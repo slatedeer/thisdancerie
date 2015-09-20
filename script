@@ -1,0 +1,108 @@
+var map;
+var startLat;
+var startLon;
+var startPos;
+
+function initialize() {
+
+  // map 
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 13,
+    center: {lat: 48.856614, lng: 2.352222}
+  });
+
+// the latitudes and longitudes of the markers
+
+  	var myLatlng1 = new google.maps.LatLng(48.883744,2.332259); //la place blanche
+    var myLatlng2 = new google.maps.LatLng(48.866154,2.309556); //german embassy
+    var myLatlng3 = new google.maps.LatLng(48.862778, 2.31); // Magic City 
+    var myLatlng4 = new google.maps.LatLng(48.866614,2.352222); //
+
+// text inside of info windows
+
+	var contentString1 = '<a href="http://thisdancerie.blogspot.com/search?q=la+place+blanche&max-results=20&by-date=true" target="new">La Place Blanche</a>';
+    
+
+    var contentString2 = '<a href="http://thisdancerie.blogspot.com/2014/07/ernst-vom-rath-and-herschel-grynszpan.html" target="new">The Murder of Ernst vom Rath by Herschel Grynszpan</a>';
+
+  	var contentString3 = '<a href="http://thisdancerie.blogspot.com/search?q=magic-city&max-results=20&by-date=true" target="new">Magic City Info </a>';
+
+  	var contentString4 = '<p>'+
+      'link to something else'+
+      '</p>';
+
+// actual info windows
+
+    var infowindow1 = new google.maps.InfoWindow({
+      content: contentString1
+  	});
+
+    var infowindow2 = new google.maps.InfoWindow({
+      content: contentString2
+  	});
+
+    var infowindow3 = new google.maps.InfoWindow({
+      content: contentString3
+  	});
+
+    var infowindow4 = new google.maps.InfoWindow({
+      content: contentString4
+  	});
+
+// these are the actual markers
+
+  var marker1 = new google.maps.Marker({
+      position: myLatlng1,
+      map: map,
+      title: 'La Place Blanche'
+  });
+
+  var marker2 = new google.maps.Marker({
+      position: myLatlng2,
+      map: map,
+      title: 'The Murder of Ernst vom Rath'
+  });
+
+  var marker3 = new google.maps.Marker({
+      position: myLatlng3,
+      map: map,
+      title: 'Magic City'
+  });
+
+  var marker4 = new google.maps.Marker({
+      position: myLatlng4,
+      map: map,
+      title: ''
+  });
+
+  // this adds the "infowindow" when you click the marker
+
+  google.maps.event.addListener(marker1, 'click', function() {
+    infowindow1.open(map,marker1);
+  });
+
+  google.maps.event.addListener(marker2, 'click', function() {
+   infowindow2.open(map,marker2);
+   //window.location.href = thisdancerie.blogspot.com/2014/07/ernst-vom-rath-and-herschel-grynszpan.html;
+  }); //this link doesn't work
+
+  google.maps.event.addListener(marker3, 'click', function() {
+    infowindow3.open(map,marker3);
+  });
+
+  google.maps.event.addListener(marker4, 'click', function() {
+    infowindow4.open(map,marker4);
+  });
+}
+
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+
+// great place to find lat and long
+// http://www.latlong.net/
